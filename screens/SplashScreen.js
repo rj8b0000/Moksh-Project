@@ -13,8 +13,9 @@ export default function SplashScreen() {
     const checkUserLogin = async () => {
         const email = await AsyncStorage.getItem('EMAIL');
         const password = await AsyncStorage.getItem('PASSWORD')
+        const email_verified = await AsyncStorage.getItem('EMAIL_VERIFIED');
         // console.warn(email + ' ' + password)
-        if(email == null)
+        if(!email && !password && !email_verified)
         {
             navigation.dispatch(StackActions.replace('MokshHome'))
         }

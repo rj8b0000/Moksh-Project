@@ -51,6 +51,10 @@ const SignInForNewUser = () => {
       else{
         Alert.alert("Please enter all data")
       }
+      emailVerified ? await AsyncStorage.setItem('EMAIL_VERIFIED', emailVerified) &&
+      navigation.navigate('Home') : 
+      Alert.alert("You are not verfied") &&
+      navigation.navigate("MokshHome");
     }
     catch(error)
     {

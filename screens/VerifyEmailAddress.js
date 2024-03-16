@@ -9,6 +9,7 @@ import { useNavigation,StackActions } from "@react-navigation/native";
 const VerifyEmailAddress = () => {
   const navigation = useNavigation()
   const [email,setEmail] = useState('')
+  const [emailVerified, setEmailVerified] = useState(false);
   const auth = getAuth()
   // const {user, setUser} = useContext(auth.currentUser)
 
@@ -17,18 +18,21 @@ const VerifyEmailAddress = () => {
     try{
       if(email.length > 0)
       {
-        // console.warn(auth.currentUser.email)
         await sendEmailVerification(auth.currentUser)
         .then(()=>{
             navigation.navigate("SignInForNewUser")
           })
-        //   else{
-        //     alert("Please Verify your email, checkout inbox")
-        //     // sendEmailVerification(auth.currentUser)
-        //   }
+          // else{
+          //   alert("Please Verify your email, checkout inbox")
+          //   // sendEmailVerification(auth.currentUser)
+          // }
         // })
         // navigation.navigate("SignInEmptyState")
         // alert("Please verify your email, checkout link in your inbox")
+      }
+      else
+      {
+        Alert.alert("Please Enter all Data")
       }
     }
 
@@ -58,7 +62,7 @@ const VerifyEmailAddress = () => {
         <View style={styles.bottomButton}>
           <Pressable
             style={[styles.buttons, styles.buttonsFlexBox]}
-            onPress={onVerifyEmail}
+            onPress={()=>onVerifyEmail()}
           >
             <Text style={styles.buttonText} >Verify</Text>
           </Pressable>
