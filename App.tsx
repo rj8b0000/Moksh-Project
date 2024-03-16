@@ -1,23 +1,17 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-// import { useFonts } from "expo-font";
 import MokshHome from './screens/MokshHome';
-// import SignInFilledState from "./screens/SignInFilledState";
-import SuccessMessage from './screens/SuccessMessage';
 import EnterNewPassword from './screens/EnterNewPassword';
 import ForgotPassword from './screens/ForgotPassword';
 import SignInEmptyState from './screens/SignInEmptyState';
 import SignUpEmptyState from './screens/SignUpEmptyState';
-// import PreSignUpLogIn from "./screens/PreSignUpLogIn";
 import TermsAndConditions from './screens/TermsAndConditions';
-
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './screens/dashboard';
 import VerifyAccount from './screens/VerifyAccount';
 import VerifyPhoneNumber from './screens/VerifyPhoneNumber';
 import VerifyEmailAddress from './screens/VerifyEmailAddress';
-import OTP from './screens/InputOTPScreen';
 import SplashScreen from './screens/SplashScreen';
 import SignInForNewUser from './screens/SignInForNewUser';
 import Home from './screens/ManrtaPlayer/Home';
@@ -65,11 +59,6 @@ const App = () => {
               options={{headerShown: false}}
             />
             <Stack.Screen
-              name="SuccessMessage"
-              component={SuccessMessage}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
               name="EnterNewPassword"
               component={EnterNewPassword}
               options={{headerShown: false}}
@@ -111,11 +100,6 @@ const App = () => {
             <Stack.Screen
               name="SignInForNewUser"
               component={SignInForNewUser}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="InputOTPScreen"
-              component={OTP}
               options={{headerShown: false}}
             />
             <Stack.Screen
