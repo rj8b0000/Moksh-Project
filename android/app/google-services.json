@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "371575297728",
+    "project_id": "moksh-app-bd73b",
+    "storage_bucket": "moksh-app-bd73b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371575297728:android:be866d64623cd3f28bff25",
+        "android_client_info": {
+          "package_name": "com.moksh_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371575297728-80k6ii1d25vil0qbdrcsl9dhghrv0t1c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moksh_app",
+            "certificate_hash": "0364c12450223b95cb6e2214179297932450d1ef"
+          }
+        },
+        {
+          "client_id": "371575297728-9s2079de3aa5c0r28dnuunn591ulqsta.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moksh_app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "371575297728-9d6gulie57u58jpi00v0nteqi015sfio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhIa4KJ6BtQ4FC9Lsztgl0j4seEXnpqO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371575297728-9d6gulie57u58jpi00v0nteqi015sfio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

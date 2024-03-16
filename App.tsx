@@ -1,118 +1,152 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+/* eslint-disable prettier/prettier */
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+// import { useFonts } from "expo-font";
+import MokshHome from './screens/MokshHome';
+// import SignInFilledState from "./screens/SignInFilledState";
+import SuccessMessage from './screens/SuccessMessage';
+import EnterNewPassword from './screens/EnterNewPassword';
+import ForgotPassword from './screens/ForgotPassword';
+import SignInEmptyState from './screens/SignInEmptyState';
+import SignUpEmptyState from './screens/SignUpEmptyState';
+// import PreSignUpLogIn from "./screens/PreSignUpLogIn";
+import TermsAndConditions from './screens/TermsAndConditions';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from './screens/dashboard';
+import VerifyAccount from './screens/VerifyAccount';
+import VerifyPhoneNumber from './screens/VerifyPhoneNumber';
+import VerifyEmailAddress from './screens/VerifyEmailAddress';
+import OTP from './screens/InputOTPScreen';
+import SplashScreen from './screens/SplashScreen';
+import SignInForNewUser from './screens/SignInForNewUser';
+import Home from './screens/ManrtaPlayer/Home';
+import Music from './screens/ManrtaPlayer/Music';
+import Mala from './screens/Mala Jaap/Mala';
+import JaapCompleteScreen from './screens/Mala Jaap/JaapCompleteScreen';
+// import MusicPlayer from "./screens/Components/MusicPlayer";
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  // const [fontsLoaded, error] = useFonts({
+  //   "KronaOne-Regular": require("./assets/fonts/KronaOne-Regular.ttf"),
+  //   "Montserrat-Regular": require("./assets/fonts/Montserrat-Regular.ttf"),
+  //   "Montserrat-SemiBold": require("./assets/fonts/Montserrat-SemiBold.ttf"),
+  //   "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
+  // });
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  // if (!fontsLoaded && !error) {
+  //   return null;
+  // }
+  const Stack = createStackNavigator();
+  // const [userData, setUserData] = React.useState();
+  // React.useEffect(()=>{
+
+  // })
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <>
+      <NavigationContainer>
+        {hideSplashScreen ? (
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen
+              name="SplashScreen"
+              component={SplashScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="MokshHome"
+              component={MokshHome}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="VerifyEmailAddress"
+              component={VerifyEmailAddress}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="SuccessMessage"
+              component={SuccessMessage}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EnterNewPassword"
+              component={EnterNewPassword}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPassword}
+              options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+              name="SignInEmptyState"
+              component={SignInEmptyState}
+              options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+              name="SignUpEmptyState"
+              component={SignUpEmptyState}
+              options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+              name="TermsAndConditions"
+              component={TermsAndConditions}
+              options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+              name="VerifyAccount"
+              component={VerifyAccount}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="VerifyPhoneNumber"
+              component={VerifyPhoneNumber}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="SignInForNewUser"
+              component={SignInForNewUser}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="InputOTPScreen"
+              component={OTP}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="MantraHome"
+              component={Home}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="MantraPlayer"
+              component={Music}
+              options={{headerShown: true}}
+            />
+            <Stack.Screen
+              name="Mala"
+              component={Mala}
+              options={{headerShown: true}}
+            />
+            <Stack.Screen
+              name="JaapDone"
+              component={JaapCompleteScreen}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        ) : null}
+      </NavigationContainer>
+    </>
   );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
+};
 export default App;

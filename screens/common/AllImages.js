@@ -1,0 +1,11 @@
+export const meditating_boy = require('../../assets/meditating_boy.png');
+export const beadImage = require('../../assets/rudraksh.png');
+export const mala_jaap = require('../../assets/mala_jaap.png');
+export const dashboard_mala_img = require('../../assets/images/mala.jpg');
+export const moksh_logo_bg = require('../../assets/ellipse-1.png');
+export const apple_logo = require('../../assets/apple.png');
+export const google_logo = require('../../assets/google.png');
+export const eye_off = require('../../assets/eyeoff.png');
+export const eye_on = require('../../assets/eyeon.png');
+export const email_icon = require('../../assets/icon.png');
+export const phone_icon = require('../../assets/icon1.png');
