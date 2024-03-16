@@ -6,7 +6,7 @@ import {FontFamily, Padding, Border, FontSize, Color} from '../GlobalStyles';
 import SearchBar from './common/SearchBar';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
-import { dashboard_mala_img } from './common/AllImages';
+import { chant_mala, dashboard_mala_img } from './common/AllImages';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -54,7 +54,7 @@ const HomeScreen = () => {
       </View>
       <View style={styles.mantras}>
         <Text style={styles.mantraText}>Popular mantras</Text>
-      </View>
+      
       <View style={styles.artworkWrapper}>
         <TouchableOpacity onPress={() => navigation.navigate('MantraHome')}>
           <Image
@@ -62,6 +62,19 @@ const HomeScreen = () => {
             style={styles.artworkImg}
           />
         </TouchableOpacity>
+      </View>
+      </View>
+      <View style={styles.mantras}>
+        <Text style={styles.mantraText}>Chant mala</Text>
+      
+      <View style={styles.artworkWrapper}>
+        <TouchableOpacity onPress={() => navigation.navigate('Mala')}>
+          <Image
+            source={chant_mala}
+            style={styles.artworkImg}
+          />
+        </TouchableOpacity>
+      </View>
       </View>
     </View>
   );
@@ -85,18 +98,17 @@ const styles = StyleSheet.create({
     backgroundColor: Color.background,
   },
   mantras: {
-    top: 25,
+    marginTop : "5%",
   },
   mantraText: {
     fontWeight: 'bold',
     fontSize: 25,
-    color: 'grey'
+    color: 'black'
   },
   artworkWrapper: {
-    top: 40,
+    marginTop: '5%',
     width: 250,
-    height: 180,
-    marginBottom: 25,
+    height: 150,
     shadowColor: '#fff',
     shadowOffset: {
       width: 5,

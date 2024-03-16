@@ -87,6 +87,7 @@ const SignUpEmptyState = () => {
       .then(async () => {
         if (email.length > 0 && password.length > 0) {
           await AsyncStorage.setItem('NAME', name);
+          await AsyncStorage.setItem('PRE-USR-EMAIL',email);
           navigation.dispatch(StackActions.replace('VerifyAccount'));
         } else {
           Alert.alert('Please enter all data');

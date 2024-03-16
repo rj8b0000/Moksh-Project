@@ -14,15 +14,19 @@ export default function SplashScreen() {
         const email = await AsyncStorage.getItem('EMAIL');
         const password = await AsyncStorage.getItem('PASSWORD')
         const email_verified = await AsyncStorage.getItem('EMAIL_VERIFIED');
+        const pre_usr_email = await AsyncStorage.getItem('PRE-USR-EMAIL');
         // console.warn(email + ' ' + password)
-        if(!email && !password && !email_verified)
+        if(email && password)
         {
-            navigation.dispatch(StackActions.replace('MokshHome'))
+            navigation.dispatch(StackActions.replace('Home'))
+        }
+        else if(pre_usr_email)
+        {
+            navigation.navigate('SignInEmptyState');
         }
         else
         {
-            navigation.dispatch(StackActions.replace('Home'))
-
+            navigation.dispatch(StackActions.replace('MokshHome'));
         }
     }
     return (

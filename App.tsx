@@ -18,6 +18,7 @@ import Home from './screens/ManrtaPlayer/Home';
 import Music from './screens/ManrtaPlayer/Music';
 import Mala from './screens/Mala Jaap/Mala';
 import JaapCompleteScreen from './screens/Mala Jaap/JaapCompleteScreen';
+import Mala_Mantraplayer from './screens/Mala Jaap/MantraAndMala';
 // import MusicPlayer from "./screens/Components/MusicPlayer";
 
 const App = () => {
@@ -118,13 +119,18 @@ const App = () => {
               options={{headerShown: true}}
             />
             <Stack.Screen
-              name="Mala"
-              component={Mala}
+              name="Mala_Mantraplayer"
+              component={Mala_Mantraplayer}
               options={{headerShown: true}}
             />
             <Stack.Screen
               name="JaapDone"
               component={JaapCompleteScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Mala"
+              component={Mala}
               options={{headerShown: false}}
             />
           </Stack.Navigator>

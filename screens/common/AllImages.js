@@ -9,3 +9,4 @@ export const eye_off = require('../../assets/eyeoff.png');
 export const eye_on = require('../../assets/eyeon.png');
 export const email_icon = require('../../assets/icon.png');
 export const phone_icon = require('../../assets/icon1.png');
+export const chant_mala = require('../../assets/images/chant_mala.jpg');

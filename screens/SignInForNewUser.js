@@ -26,8 +26,12 @@ const SignInForNewUser = () => {
   const [email,setEmail] = React.useState('')
   const [password,setPassword] = React.useState('')
   const [modalVisible, setModalVisible] = React.useState(true)
-  const [emailVerified, setEmailVerified] = React.useState(true);
+  const [emailVerified, setEmailVerified] = React.useState("false");
   const auth = getAuth();
+  const emailVerifiedAndNavigateToHome =  async () => {
+    await AsyncStorage.setItem('EMAIL_VERIFIED', emailVerified) 
+    navigation.navigate('Home')
+  }
   const handleLogin =  async (email, password) => {
     const auth = getAuth(app);
 
@@ -40,9 +44,11 @@ const SignInForNewUser = () => {
         const user = await signInWithEmailAndPassword(auth, email, password);
         console.log(user)
         if(user.user.emailVerified){
+          await AsyncStorage.removeItem('PRE-USR-EMAIL');
+          await AsyncStorage.removeItem('PRE-USR-PASS');
           await AsyncStorage.setItem('EMAIL', email);
           await AsyncStorage.setItem('PASSWORD', password);
-          setEmailVerified(true);
+          setEmailVerified("true");
         }
         else{
             Alert.alert("Please go to your inbox to verify email")
@@ -51,8 +57,8 @@ const SignInForNewUser = () => {
       else{
         Alert.alert("Please enter all data")
       }
-      emailVerified ? await AsyncStorage.setItem('EMAIL_VERIFIED', emailVerified) &&
-      navigation.navigate('Home') : 
+      emailVerified == "true" ? 
+      emailVerifiedAndNavigateToHome() : 
       Alert.alert("You are not verfied") &&
       navigation.navigate("MokshHome");
     }
@@ -135,7 +141,9 @@ const SignInForNewUser = () => {
             <TextInput style={[styles.email, styles.emailTypo]} 
             onChangeText={(email)=>setEmail(email)}
              placeholder="Email" 
-             autoCapitalize="none"/>
+             autoCapitalize="none"
+             placeholderTextColor = "grey"
+             />
           </GestureHandlerRootView>
           </View>
           
@@ -144,7 +152,7 @@ const SignInForNewUser = () => {
             style={[styles.password, styles.emailTypo]}>
             <TextInput style={[styles.password, styles.emailTypo]}
             onChangeText={(password)=>setPassword(password)}
-             placeholder="Password" secureTextEntry={passwordVisible}
+             placeholder="Password" secureTextEntry={passwordVisible} placeholderTextColor = "grey"
         autoCapitalize="none"/>
           </GestureHandlerRootView>
           <TouchableOpacity onPress={()=>setPasswordVisible(!passwordVisible)}>

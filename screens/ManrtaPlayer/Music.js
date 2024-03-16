@@ -8,7 +8,7 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-import React, {useEffect, useReducer, useRef, useState} from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import {
   CurrentRenderContext,
   useNavigation,
@@ -28,8 +28,9 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import axios from 'axios';
 import { mala_jaap } from '../common/AllImages';
+import Mala_Mantraplayer from '../Mala Jaap/MantraAndMala';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const Music = () => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -112,141 +113,138 @@ const Music = () => {
     }
   };
   return (
-    <View style={styles.container}>
-      <View>
-        <TouchableOpacity
-          style={{flexDirection: 'row'}}
-          onPress={() => navigation.navigate('Mala')}>
-          <Image
-            source={mala_jaap}
-            style={{width: 50, height: 50, marginTop: 5}}
-          />
-          <View style={{justifyContent: 'center'}}>
-            <Text style={{justifyContent: 'center', color: 'black'}}>
-              Let's Jaap Mala
-            </Text>
-          </View>
-        </TouchableOpacity>
-        <FlatList
-          horizontal
-          ref={ref}
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled 
-          data={mantras}
-          onScroll={async e => {
-            const x = e.nativeEvent.contentOffset.x / width;
-            setCurrentSong(parseInt(x.toFixed(0)));
-            await TrackPlayer.skip(parseInt(x.toFixed(0)));
-            togglePlayback(playbackState);
-          }}
-          renderItem={({item, index}) => {
-            const prefixUrl =
-              'https://bugle.co.in/moksh/public/public/assets/images/mantra_thumbnail/';
-            // console.log(`${prefixUrl}${item.artwork}`)
-            return (
-              <>
-                <View style={styles.bannerView}>
-                  <Image
-                    source={{uri: `${prefixUrl}${item.artwork}`}}
-                    style={styles.banner}
-                  />
-                  <Text style={styles.name}>{item.title}</Text>
-                </View>
-              </>
-            );
-          }}
-        />
-      </View>
-      {/* <Text style={styles.name}>{route.params.data.artist}</Text> */}
-      <View style={styles.sliderView}>
-        <Slider
-          value={progress.position}
-          maximumValue={progress.duration}
-          minimumValue={0}
-          thumbStyle={{width: 20, height: 20}}
-          thumbTintColor="#000"
-          onValueChange={async value => {
-            await TrackPlayer.seekTo(value);
-          }}
-        />
-      </View>
-      <View style={styles.btnArea}>
-        <TouchableOpacity
-          onPress={async () => {
-            if (currentSong > 0) {
-              setCurrentSong(currentSong - 1);
-              ref.current.scrollToIndex({
-                animated: true,
-                index: currentSong - 1,
-              });
-              await TrackPlayer.skipToPrevious();
-              togglePlayback(playbackState);
-            }
-          }}>
-          <Foundation
-            name="previous"
-            size={45}
-            color="black"
-            style={{margin: 15}}
-          />
-        </TouchableOpacity>
+    <Mala_Mantraplayer/>
+    // <View style={styles.container}>
+    //   <View>
+    //     <TouchableOpacity
+    //       style={{ flexDirection: 'row' }}
+    //       onPress={() => navigation.navigate('Mala_Mantraplayer')}>
+    //       <Image
+    //         source={mala_jaap}
+    //         style={{ width: 50, height: 50, marginTop: 5 }}
+    //       />
+    //       <View style={{ justifyContent: 'center' }}>
+    //         <Text style={{ justifyContent: 'center', color: 'black' }}>
+    //           Let's Jaap Mala
+    //         </Text>
+    //       </View>
+    //     </TouchableOpacity>
+    //     <FlatList
+    //       horizontal
+    //       ref={ref}
+    //       showsHorizontalScrollIndicator={false}
+    //       pagingEnabled
+    //       data={mantras}
+    //       onScroll={async e => {
+    //         const x = e.nativeEvent.contentOffset.x / width;
+    //         setCurrentSong(parseInt(x.toFixed(0)));
+    //         await TrackPlayer.skip(parseInt(x.toFixed(0)));
+    //         togglePlayback(playbackState);
+    //       }}
+    //       renderItem={({ item, index }) => {
+    //         const prefixUrl =
+    //           'https://bugle.co.in/moksh/public/public/assets/images/mantra_thumbnail/';
+    //         // console.log(`${prefixUrl}${item.artwork}`)
+    //         return (
+    //           <>
+    //             <View style={styles.bannerView}>
+    //               <Image
+    //                 source={{ uri: `${prefixUrl}${item.artwork}` }}
+    //                 style={styles.banner}
+    //               />
+    //               <Text style={styles.name}>{item.title}</Text>
+    //             </View>
+    //           </>
+    //         );
+    //       }}
+    //     />
+    //   </View>
+    //   <Text style={styles.name}>{route.params.data.artist}</Text>
+    //   <View style={styles.sliderView}>
+    //     <Slider
+    //       value={progress.position}
+    //       maximumValue={progress.duration}
+    //       minimumValue={0}
+    //       thumbStyle={{ width: 20, height: 20 }}
+    //       thumbTintColor="#000"
+    //       onValueChange={async value => {
+    //         await TrackPlayer.seekTo(value);
+    //       }}
+    //     />
+    //   </View>
+    //   <View style={styles.btnArea}>
+    //     <TouchableOpacity
+    //       onPress={async () => {
+    //         if (currentSong > 0) {
+    //           setCurrentSong(currentSong - 1);
+    //           ref.current.scrollToIndex({
+    //             animated: true,
+    //             index: currentSong - 1,
+    //           });
+    //           await TrackPlayer.skipToPrevious();
+    //           togglePlayback(playbackState);
+    //         }
+    //       }}>
+    //       <Foundation
+    //         name="previous"
+    //         size={45}
+    //         color="black"
+    //         style={{ margin: 15 }}
+    //       />
+    //     </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={async () => {
-            // await TrackPlayer.skip(1)
-            togglePlayback(playbackState);
-          }}>
-          {playbackState.state == State.Ready ||
-          playbackState.state == State.Paused ? (
-            <AntDesign
-              name="play"
-              size={55}
-              color="black"
-              style={{margin: 15}}
-            />
-          ) : (
-            <AntDesign
-              name="pausecircle"
-              size={55}
-              color="black"
-              style={{margin: 15}}
-            />
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={async () => {
-            if (mantras.length - 1 > currentSong) {
-              setCurrentSong(currentSong + 1);
-              ref.current.scrollToIndex({
-                animated: true,
-                index: parseInt(currentSong) + 1,
-              });
-              await TrackPlayer.skipToNext();
-              togglePlayback(playbackState);
-            }
-          }}>
-          <Foundation
-            name="next"
-            size={45}
-            color="black"
-            style={{margin: 15}}
-          />
-        </TouchableOpacity>
+    //     <TouchableOpacity
+    //       onPress={async () => {
+    //         // await TrackPlayer.skip(1)
+    //         togglePlayback(playbackState);
+    //       }}>
+    //       {playbackState.state == State.Ready ||
+    //         playbackState.state == State.Paused ? (
+    //         <AntDesign
+    //           name="play"
+    //           size={55}
+    //           color="black"
+    //           style={{ margin: 15 }}
+    //         />
+    //       ) : (
+    //         <AntDesign
+    //           name="pausecircle"
+    //           size={55}
+    //           color="black"
+    //           style={{ margin: 15 }}
+    //         />
+    //       )}
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       onPress={async () => {
+    //         if (mantras.length - 1 > currentSong) {
+    //           setCurrentSong(currentSong + 1);
+    //           ref.current.scrollToIndex({
+    //             animated: true,
+    //             index: parseInt(currentSong) + 1,
+    //           });
+    //           await TrackPlayer.skipToNext();
+    //           togglePlayback(playbackState);
+    //         }
+    //       }}>
+    //       <Foundation
+    //         name="next"
+    //         size={45}
+    //         color="black"
+    //         style={{ margin: 15 }}
+    //       />
+    //     </TouchableOpacity>
+    //   </View>
+    //   <View style={styles.btnArea2}>
+    //     <TouchableOpacity>
+    //       <Entypo name="shuffle" size={35} color="black" style={{ margin: 10 }} />
+    //     </TouchableOpacity>
 
-        {/* <TouchableOpacity>
-                <AntDesign name="pausecircle" size={55} color="black"  style={{margin: 10}}/>
-                </TouchableOpacity> */}
-      </View>
-      <View style={styles.btnArea2}>
-        <TouchableOpacity>
-          <Entypo name="shuffle" size={35} color="black" style={{margin: 10}} />
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Feather name="repeat" size={35} color="black" style={{margin: 10}} />
-        </TouchableOpacity>
-      </View>
-    </View>
+    //     <TouchableOpacity>
+    //       <Feather name="repeat" size={35} color="black" style={{ margin: 10 }} />
+    //     </TouchableOpacity>
+    //   </View>
+    // </View>
   );
 };
 

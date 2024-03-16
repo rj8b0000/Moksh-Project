@@ -32,7 +32,7 @@ const JaapCompleteScreen = () => {
             fontSize: 20,
             textDecorationLine: 'underline',
           }}
-          onPress={() => navigation.navigate('MantraHome')}>
+          onPress={() => navigation.navigate('Home')}>
           Jaap Again!
         </Text>
       </View>
