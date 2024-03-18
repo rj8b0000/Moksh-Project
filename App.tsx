@@ -4,8 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import MokshHome from './screens/MokshHome';
 import EnterNewPassword from './screens/EnterNewPassword';
 import ForgotPassword from './screens/ForgotPassword';
-import SignInEmptyState from './screens/SignInEmptyState';
-import SignUpEmptyState from './screens/SignUpEmptyState';
+import LoginScreen from './screens/LoginScreen';
+import SignUpScreen from './screens/SignUpScreen';
 import TermsAndConditions from './screens/TermsAndConditions';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './screens/dashboard';
@@ -71,14 +71,14 @@ const App = () => {
             />
 
             <Stack.Screen
-              name="SignInEmptyState"
-              component={SignInEmptyState}
+              name="LoginScreen"
+              component={LoginScreen}
               options={{headerShown: false}}
             />
 
             <Stack.Screen
-              name="SignUpEmptyState"
-              component={SignUpEmptyState}
+              name="SignUpScreen"
+              component={SignUpScreen}
               options={{headerShown: false}}
             />
 

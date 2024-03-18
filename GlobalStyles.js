@@ -6,6 +6,7 @@ export const FontFamily = {
   bodyLargeBold: "SF Pro Display",
   interRegular: "Inter-Regular",
   sFProText: "SF Pro Text",
+  herticalSans : "Hertical Sans",
 };
 /* font sizes */
 export const FontSize = {

@@ -68,7 +68,7 @@ const TermsAndConditions = () => {
           {
             isChecked.stmt1&&isChecked.stmt2&&isChecked.stmt3 == true?<Pressable
             style={[styles.buttons2, styles.buttonsFlexBox]}
-            onPress={() => navigation.dispatch(StackActions.replace("SignInEmptyState"))}
+            onPress={() => navigation.dispatch(StackActions.replace("SignUpScreen"))}
           >
             <Text style={[styles.buttonText1, styles.buttonTypo]}>Next</Text>
           </Pressable>:null

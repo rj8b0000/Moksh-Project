@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -30,8 +30,23 @@ export default function SplashScreen() {
         }
     }
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{color: 'grey'}}>Moksh Logo</Text>
+        <View style={styles.main}>
+            <Image source={require('../assets/maharaj-hand-img.png')} style={{height: 300, width: 160}}/>
+            <Text style={styles.moksh}>MOKSH</Text>
         </View>
     );
 }
+const styles = StyleSheet.create({
+    main : {
+        backgroundColor :'#ff9f1a',
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center'
+    },
+    moksh: {
+        fontSize: 25,
+        letterSpacing: 10,
+        fontWeight: '700',
+        color: '#9E0E10'
+    }
+})
