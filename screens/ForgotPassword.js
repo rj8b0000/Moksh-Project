@@ -17,7 +17,7 @@ const ForgotPassword = () => {
   .then(() => {
     // Password reset email sent!
     Alert.alert("Password Reset Link is Send Successfully")
-    navigation.dispatch(StackActions.replace("SignInEmptyState"));
+    navigation.dispatch(StackActions.replace("LoginScreen"));
   })
   .catch((error) => {
     const errorCode = error.code;

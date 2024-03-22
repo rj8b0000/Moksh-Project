@@ -22,7 +22,7 @@ export default function SplashScreen() {
         }
         else if(pre_usr_email)
         {
-            navigation.navigate('SignInEmptyState');
+            navigation.navigate('SignUpScreen');
         }
         else
         {

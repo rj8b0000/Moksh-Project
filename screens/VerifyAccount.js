@@ -4,7 +4,7 @@ import { Image } from "react-native";
 // import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation,StackActions } from "@react-navigation/native";
 import { Color, FontFamily, Padding, Border, FontSize } from "../GlobalStyles";
-import { email_icon, phone_icon } from "./common/AllImages";
+
 
 const VerifyAccount = () => {
   const navigation = useNavigation();
@@ -47,17 +47,12 @@ const VerifyAccount = () => {
           </Text>
         </View>
         <View style={styles.verificationMethods}>
-          <Pressable
-            style={[styles.verificationMethods1, styles.verificationFlexBox, {borderWidth} ,{borderColor: "#1DAC92"}]}
+          {/* <Pressable
+            style={[styles.verificationMethods1, styles.verificationFlexBox, {borderWidth} ,{borderColor: "#9E0E10"}]}
             onPress={
               handleBorderWidth
             }
           >
-            <Image
-              style={styles.icon}
-              contentFit="cover"
-              source={email_icon}
-            />
             <View style={styles.text}>
               <Text style={[styles.myEmailAddress, styles.bodyTypo]}>
                 My email address
@@ -66,16 +61,11 @@ const VerifyAccount = () => {
                 Verify with your email
               </Text>
             </View>
-          </Pressable>
+          </Pressable> */}
           <Pressable
-            style={[styles.verificationMethods2, styles.verificationFlexBox, {borderWidth : borderWidth2}, {borderColor: "#1DAC92"}]}
+            style={[styles.verificationMethods2, styles.verificationFlexBox, {borderWidth : borderWidth2}, {borderColor: "#9E0E10"}]}
             onPress={handleOnPressPhone}
           >
-            <Image
-              style={styles.icon}
-              contentFit="cover"
-              source={phone_icon}
-            />
             <View style={styles.text}>
               <Text style={[styles.phoneNumber, styles.bodyLayout]}>
                 Phone Number
@@ -115,11 +105,6 @@ const VerifyAccount = () => {
 
       
       <View style={[styles.topBar, styles.topBarPosition]}>
-        <Image
-          style={styles.appbarIcon}
-          contentFit="cover"
-          source={require("../assets/appbar.png")}
-        />
       </View>
     </View>
   );
@@ -128,13 +113,11 @@ const VerifyAccount = () => {
 const styles = StyleSheet.create({
   titleFlexBox: {
     textAlign: "left",
-    color: Color.textBlack,
   },
   bodyTypo: {
     color: Color.textBlack,
     textAlign: "left",
-    fontFamily: FontFamily.bodyLargeBold,
-    letterSpacing: 0,
+    color: '#9E0E10',
   },
   verificationFlexBox: {
     paddingVertical: 0,
@@ -145,11 +128,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderRadius: Border.br_xs,
     alignSelf: "stretch",
-    backgroundColor: Color.background,
   },
   bodyLayout: {
     lineHeight: 20,
-    fontSize: FontSize.bodyMediumRegular_size,
+    fontSize: 18,
   },
   topBarPosition: {
     left: 0,
@@ -166,11 +148,10 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   title: {
-    fontSize: FontSize.h4Bold_size,
+    fontSize: 29,
     lineHeight: 29,
-    fontFamily: FontFamily.bodyLargeBold,
     letterSpacing: 0,
-    color: Color.textBlack,
+    color: '#9E0E10',
     fontWeight: "700",
     alignSelf: "stretch",
   },
@@ -178,7 +159,7 @@ const styles = StyleSheet.create({
     height: 40,
     marginTop: 8,
     lineHeight: 20,
-    fontSize: FontSize.bodyMediumRegular_size,
+    fontSize: 17,
     alignSelf: "stretch",
   },
   titleBody: {
@@ -192,7 +173,7 @@ const styles = StyleSheet.create({
   },
   myEmailAddress: {
     lineHeight: 20,
-    fontSize: FontSize.bodyMediumRegular_size,
+    fontSize: 18,
     fontWeight: "700",
   },
   verifyWithYour: {
@@ -206,8 +187,7 @@ const styles = StyleSheet.create({
   },
   phoneNumber: {
     textAlign: "left",
-    color: Color.textBlack,
-    fontFamily: FontFamily.bodyLargeBold,
+    color: '#9E0E10',
     letterSpacing: 0,
     fontWeight: "700",
   },
@@ -236,7 +216,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: Padding.p_29xl,
     paddingVertical: Padding.p_5xs,
-    backgroundColor: "#1dac92",
+    backgroundColor: "#9E0E10",
     alignItems: "center",
     flexDirection: "row",
     width: "100%",
@@ -300,8 +280,68 @@ const styles = StyleSheet.create({
     height: 812,
     overflow: "hidden",
     width: "100%",
-    backgroundColor: Color.background,
+    backgroundColor: '#ff9f1a',
   },
 });
 
 export default VerifyAccount;
+
+
+
+
+
+
+
+
+
+// import 'react-native-gesture-handler';
+// import { ScrollView, StyleSheet, Text, View } from 'react-native'
+// import React from 'react'
+// import { createStackNavigator } from '@react-navigation/stack'
+// import HomeScreen from './screens/HomeScreen';
+// import { NavigationContainer } from '@react-navigation/native';
+// import LoginScreen from './screens/LoginScreen';
+// import SignUpScreen from './screens/SignUpScreen';
+// import WelcomeScreen from './screens/WelcomeScreen';
+// import TermsAndConditions from './screens/TermsAndConditions';
+// import Progress from './screens/ProgressBar';
+// import VerifyAccount from './screens/VerifyAccount';
+
+// const App = () => {
+//   const Stack = createStackNavigator();
+//   return (
+//     <NavigationContainer>
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         name='VerifyAccount'
+//         component={VerifyAccount}
+//         options={{headerShown: false}}
+//       />
+//       <Stack.Screen
+//         name='Welcome'
+//         component={WelcomeScreen}
+//         options={{headerShown: false}}
+//       />
+//       <Stack.Screen
+//         name='HomeScreen'
+//         component={HomeScreen}
+//         options={{headerShown: false}}
+//       />
+//       <Stack.Screen
+//         name='Login'
+//         component={LoginScreen}
+//         options={{headerShown: false}}
+//       />
+//       <Stack.Screen
+//         name='SignUp'
+//         component={SignUpScreen}
+//         options={{headerShown: false}}
+//       />
+//     </Stack.Navigator>  
+//     </NavigationContainer>
+//   )
+// }
+
+// export default App
+
+// const styles = StyleSheet.create({})
