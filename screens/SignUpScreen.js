@@ -33,6 +33,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import Progress from './common/ProgressBar';
 import { ProgressBar } from '@react-native-community/progress-bar-android';
+import axios from 'axios';
+
 
 
 const SignUpScreen = () => {
@@ -45,12 +47,13 @@ const SignUpScreen = () => {
   const [error, setError] = React.useState();
   const [progress, setProgress] = React.useState(0);
   const [progressBarVisible, setProgressBarVisible] = React.useState(false)
+  const [googleAccData, setGoogleAccData] = React.useState(null);
 
 
   // const [initializing,setInitializing] = React.useState(true)
   // const [user,setUser] = React.useState()
   const progressProps = {
-    styleAttr : "Horizontal",
+    styleAttr: "Horizontal",
     indeterminate: true,
     color: '#b33939',
     height: 50,
@@ -78,9 +81,9 @@ const SignUpScreen = () => {
     function updateProgress() {
       setProgress((currentProgress) => {
         if (currentProgress < 0.8) {
-          setTimeout(updateProgress, 600)
+          setTimeout(updateProgress, 200)
         };
-        return currentProgress + 0.1;
+        return currentProgress + 0.01;
       })
     };
     updateProgress();
@@ -101,71 +104,125 @@ const SignUpScreen = () => {
     try {
       loaderFunctionForGoogleSignIn();
       setProgressBarVisible(true)
-      setTimeout(async()=>{
+      setTimeout(async () => {
         await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-        setProgressBarVisible(false)
-        const { idToken } = await GoogleSignin.signIn();
+        // setProgressBarVisible(false)
+        const {idToken, user} = await GoogleSignin.signIn();
+        let name = user.name;
+        let email = user.email;
+        let ggl_user_profile = user.photo;
+        var last_login_date = getCurrentDate();
+        fetch('https://bugle.co.in/moksh/public/api/user-management/store', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ name , email, last_login_date }),
+            })
+              .then(response => response.json())
+              .then(data => {
+                console.log(data);
+                AsyncStorage.setItem('NAME', name);
+                AsyncStorage.setItem('GGL_USER_PHOTO', ggl_user_profile)
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
         const googleCredential = auth.GoogleAuthProvider.credential(idToken);
         return auth()
           .signInWithCredential(googleCredential)
           .then(() => {
+            AsyncStorage.setItem('GGL-LOGIN-USER', JSON.stringify(googleCredential));
             navigation.dispatch(StackActions.replace('Home'));
+            console.log("Sign in Successfully")
           });
-      },3000)
+      }, 3000)
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
+        Alert.alert("Sign In Canceled By user")
+        setProgressBarVisible(false)
+        setProgress(0);
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
+        Alert.alert("Sign In Progress")
+        setProgressBarVisible(false)
+        setProgress(0);
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
+        Alert.alert("Google Services not avaialable")
+        setProgressBarVisible(false)
+        setProgress(0);
       } else {
-        // some other error happened
+        Alert.alert("An Unkown Error occured! Please try again later")
+        setProgressBarVisible(false)
+        setProgress(0);
       }
     }
   };
+  const getCurrentDate = () => {
+
+    const currentDate = new Date();
+
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so add 1
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
 
   const handleSignUp = async (email, password, name) => {
 
+
     const auth = getAuth(app);
+    var last_login_date = getCurrentDate();
     // const db = getFirestore(app);
-    if(email.length>0 && password.length>0)
-    {
-        loaderFunction();
-        setProgressBarVisible(true)
-          createUserWithEmailAndPassword(auth, email, password)
-          .then(async () => {
-            if (email.length > 0 && password.length > 0) {
-              await AsyncStorage.setItem('NAME', name);
-              await AsyncStorage.setItem('PRE-USR-EMAIL', email);
-              navigation.dispatch(StackActions.replace('VerifyAccount'));
-            } else {
-              Alert.alert('Please enter all data');
-            }
-          })
-          .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-              Alert.alert("Email Already Exists")
-              setProgressBarVisible(false)
-              setProgress(0)
-            }
-    
-            if (error.code === 'auth/invalid-email') {
-              Alert.alert("Please Enter a Valid Email")
-              setProgressBarVisible(false)
-              setProgress(0)
-            }
-            if(error.code === 'auth/weak-password')
-            {
-              Alert.alert("Please select greater than 6 digits")
-              setProgressBarVisible(false)
-              setProgress(0)
-            }
-            console.error(error);
-          });
+    if (email.length > 0 && password.length > 0) {
+      loaderFunction();
+      setProgressBarVisible(true)
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async () => {
+          if (email.length > 0 && password.length > 0) {
+            await AsyncStorage.setItem('NAME', name);
+            fetch('https://bugle.co.in/moksh/public/api/user-management/store', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ name, email, last_login_date }),
+            })
+              .then(response => response.json())
+              .then(data => {
+                console.log(data); // Handle response from backend
+                 AsyncStorage.setItem('PRE-USR-EMAIL', email);
+                navigation.dispatch(StackActions.replace('VerifyAccount'));
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+          } else {
+            Alert.alert('Please enter all data');
+          }
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            Alert.alert("Email Already Exists")
+            setProgressBarVisible(false)
+            setProgress(0)
+          }
+
+          if (error.code === 'auth/invalid-email') {
+            Alert.alert("Please Enter a Valid Email")
+            setProgressBarVisible(false)
+            setProgress(0)
+          }
+          if (error.code === 'auth/weak-password') {
+            Alert.alert("Please select greater than 6 digits")
+            setProgressBarVisible(false)
+            setProgress(0)
+          }
+          console.error(error);
+        });
     }
-    else
-    {
+    else {
       Alert.alert('Please enter all data')
     }
   };
@@ -186,12 +243,12 @@ const SignUpScreen = () => {
         <View style={styles.loginView}>
           <View style={styles.loginForm}>
             {
-              progressBarVisible ? 
-                    <View>
-                    <Text style={styles.progressText}>{Math.round(progress * 100)}%</Text>
-                    <ProgressBar {...progressProps} progress={progress}/>
-                    </View>
-                  :null
+              progressBarVisible ?
+                <View>
+                  <Text style={styles.progressText}>{Math.round(progress * 100)}%</Text>
+                  <ProgressBar {...progressProps} progress={progress} />
+                </View>
+                : null
             }
             <Text style={{ color: 'grey', fontWeight: 'bold' }}>Full Name</Text>
             <TextInput
@@ -247,7 +304,7 @@ const SignUpScreen = () => {
           </View>
           <Text style={{ fontWeight: 'bold', textAlign: 'center', color: 'grey', paddingVertical: 5, fontSize: 25 }}>Or</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 45 }}>
-            <TouchableOpacity style={{ backgroundColor: '#dfe4ea', borderRadius: 15 }} onPress={()=>signIn()}>
+            <TouchableOpacity style={{ backgroundColor: '#dfe4ea', borderRadius: 15 }} onPress={() => signIn()}>
               <Image source={require('../assets/google-icon.png')} style={{ width: 60, height: 60 }} />
             </TouchableOpacity>
             <TouchableOpacity style={{ backgroundColor: '#dfe4ea', borderRadius: 15 }}>

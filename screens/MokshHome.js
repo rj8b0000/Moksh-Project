@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native'
+import { StackActions, useNavigation } from '@react-navigation/native'
 
 const WelcomeScreen = () => {
     const navigation = useNavigation();
@@ -15,7 +15,7 @@ const WelcomeScreen = () => {
             <Image source={require('../assets/maharaj-hand-img.png')} style={{height: 350, width: 180}}/>
         </View>
         <View style={styles.signUpView}>
-            <TouchableOpacity style={styles.signUpBtn} onPress={() => navigation.navigate('TermsAndConditions')}>
+            <TouchableOpacity style={styles.signUpBtn} onPress={() => navigation.dispatch(StackActions.replace('TermsAndConditions'))}>
                 <Text style={styles.signUpText}>Get Started</Text>
             </TouchableOpacity>
         </View>

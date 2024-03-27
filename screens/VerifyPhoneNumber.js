@@ -22,6 +22,7 @@ import auth from '@react-native-firebase/auth';
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const VerifyPhoneNumber = () => {
   const navigation = useNavigation();
@@ -167,6 +168,7 @@ const VerifyPhoneNumber = () => {
       setProgressBarVisibleForOTP(true)
       try {
         await confirm.confirm(otp).then(() => {
+         AsyncStorage.removeItem('PRE-USR-EMAIL');
           navigation.dispatch(StackActions.replace('Home'));
         });
       } catch (error) {
@@ -252,7 +254,7 @@ const VerifyPhoneNumber = () => {
           >
             <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#fff', textAlign: 'center'}}>Verify OTP</Text>
           </TouchableOpacity>: 
-          <Pressable style={{ paddingVertical: 15, backgroundColor: '#8c3031', borderRadius: 10, marginVertical: 20 }}
+          <Pressable style={{ paddingVertical: 15, backgroundColor: 'grey', borderRadius: 10, marginVertical: 20 }}
           >
             <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#fff', textAlign: 'center'}}>Verify OTP</Text>
           </Pressable>

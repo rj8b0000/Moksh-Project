@@ -13,16 +13,20 @@ const HomeScreen = () => {
   const [email, getEmail] = useState('');
   const [password, getPassword] = useState('');
   const [name, getName] = useState('');
+  const [profilePhoto, setProfilePhoto] = useState('');
   useEffect(() => {
     getData();
+    console.log(profilePhoto)
   }, []);
   const getData = async () => {
     const email = await AsyncStorage.getItem('EMAIL');
     const password = await AsyncStorage.getItem('PASSWORD');
     const name = await AsyncStorage.getItem('NAME');
+    const photo = await AsyncStorage.getItem('GGL_USER_PHOTO');
     getEmail(email);
     getPassword(password);
     getName(name);
+    setProfilePhoto(photo)
   };
   const renderMantra = ({index, item}) => {
     return (
@@ -41,7 +45,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.userdetails}>
         <Image
-          source={require('../assets/noprofile.jpg')}
+          source={{ uri : profilePhoto}}
           style={{width: 40, height: 40, borderRadius: 100, display: 'flex'}}
         />
         <View style={styles.username}>

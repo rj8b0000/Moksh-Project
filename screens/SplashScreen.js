@@ -15,6 +15,7 @@ export default function SplashScreen() {
         const password = await AsyncStorage.getItem('PASSWORD')
         const email_verified = await AsyncStorage.getItem('EMAIL_VERIFIED');
         const pre_usr_email = await AsyncStorage.getItem('PRE-USR-EMAIL');
+        const ggl_login_usr = await AsyncStorage.getItem('GGL-LOGIN-USER');
         // console.warn(email + ' ' + password)
         if(email && password)
         {
@@ -22,7 +23,11 @@ export default function SplashScreen() {
         }
         else if(pre_usr_email)
         {
-            navigation.navigate('SignUpScreen');
+            navigation.navigate('SignInForNewUser');
+        }
+        else if(ggl_login_usr)
+        {
+            navigation.dispatch(StackActions.replace('Home'))
         }
         else
         {

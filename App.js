@@ -19,26 +19,10 @@ import Music from './screens/ManrtaPlayer/Music';
 import Mala from './screens/Mala Jaap/Mala';
 import JaapCompleteScreen from './screens/Mala Jaap/JaapCompleteScreen';
 import Mala_Mantraplayer from './screens/Mala Jaap/MantraAndMala';
-// import MusicPlayer from "./screens/Components/MusicPlayer";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
-
-  // const [fontsLoaded, error] = useFonts({
-  //   "KronaOne-Regular": require("./assets/fonts/KronaOne-Regular.ttf"),
-  //   "Montserrat-Regular": require("./assets/fonts/Montserrat-Regular.ttf"),
-  //   "Montserrat-SemiBold": require("./assets/fonts/Montserrat-SemiBold.ttf"),
-  //   "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
-  // });
-
-  // if (!fontsLoaded && !error) {
-  //   return null;
-  // }
   const Stack = createStackNavigator();
-  // const [userData, setUserData] = React.useState();
-  // React.useEffect(()=>{
-
-  // })
   return (
     <>
       <NavigationContainer>
