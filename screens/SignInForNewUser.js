@@ -60,7 +60,7 @@ const SignInForNewUser = () => {
   const auth = getAuth();
   const emailVerifiedAndNavigateToHome =  async () => {
     await AsyncStorage.setItem('EMAIL_VERIFIED', emailVerified1) 
-    navigation.navigate('Home')
+    navigation.dispatch(StackActions.replace('Home'));
   }
   const handleLogin =  async (email, password) => {
     const auth = getAuth(app);

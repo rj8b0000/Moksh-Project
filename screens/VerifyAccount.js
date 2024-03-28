@@ -31,10 +31,10 @@ const VerifyAccount = () => {
   }
   const continueUserChoicedVerification = () => {
     if (borderWidth == 3) {
-      navigation.navigate("VerifyEmailAddress")
+      navigation.dispatch(StackActions.replace("VerifyEmailAddress"));
     }
     else {
-      navigation.dispatch(StackActions.replace("VerifyPhoneNumber"))
+      navigation.dispatch(StackActions.replace("VerifyPhoneNumber"));
     }
   }
   return (

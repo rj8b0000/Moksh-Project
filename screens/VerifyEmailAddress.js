@@ -54,7 +54,7 @@ const VerifyEmailAddress = () => {
         loaderFunction();
         await sendEmailVerification(auth.currentUser)
         .then(()=>{
-            navigation.navigate("SignInForNewUser")
+            navigation.dispatch(StackActions.replace("SignInForNewUser"))
           })
           // else{
           //   alert("Please Verify your email, checkout inbox")

@@ -116,25 +116,6 @@ const VerifyPhoneNumber = () => {
     
     // console.log(formattedValue)
   };
-  const confirmCode = async () => {
-    try {
-      const userCredential = await confirm.confirm(code);
-      const user = userCredential.user;
-
-      const userDocument = await firestore()
-        .collection('users')
-        .doc(user.uid)
-        .get();
-
-      if (userDocument.exists) {
-        navigation.navigate('dashboard');
-      } else {
-        navigation.navigate('dashboard', {uid: user.uid});
-      }
-    } catch (error) {
-      console.log('Invalid Code', error);
-    }
-  };
   const et1 = useRef();
   const et2 = useRef();
   const et3 = useRef();
@@ -169,7 +150,7 @@ const VerifyPhoneNumber = () => {
       try {
         await confirm.confirm(otp).then(() => {
          AsyncStorage.removeItem('PRE-USR-EMAIL');
-          navigation.dispatch(StackActions.replace('Home'));
+          navigation.dispatch(StackActions.replace('LoginScreen'));
         });
       } catch (error) {
         if(error.code == "auth/invalid-verification-code")

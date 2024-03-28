@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "371575297728-9s2079de3aa5c0r28dnuunn591ulqsta.apps.googleusercontent.com",
+          "client_id": "371575297728-qajl7b2lbm9n0qden1dmiei4uievbbfj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.moksh_app",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "54e378d1fff0b375afe75e25077e1f0bc1968cbe"
           }
         },
         {

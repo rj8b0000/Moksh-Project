@@ -48,30 +48,71 @@ const LoginScreen = () => {
     }, []);
     const signIn = async () => {
         try {
-            loaderFunctionForGoogleSignIn();
-            setProgressBarVisible(true)
-            setTimeout(async () => {
-                await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-                const { idToken } = await GoogleSignin.signIn();
-                const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-                return auth()
-                    .signInWithCredential(googleCredential)
-                    .then(() => {
-                        navigation.dispatch(StackActions.replace('Home'));
-                    });
-            }, 3000)
+          loaderFunctionForGoogleSignIn();
+          setProgressBarVisible(true)
+          setTimeout(async () => {
+            await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+            // setProgressBarVisible(false)
+            const {idToken, user} = await GoogleSignin.signIn();
+            let name = user.name;
+            let email = user.email;
+            let ggl_user_profile = user.photo;
+            var last_login_date = getCurrentDate();
+            fetch('https://bugle.co.in/moksh/public/api/user-management/store', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ name , email, last_login_date }),
+                })
+                  .then(response => response.json())
+                  .then(data => {
+                    console.log(data);
+                    AsyncStorage.setItem('NAME', name);
+                    AsyncStorage.setItem('GGL_USER_PHOTO', ggl_user_profile)
+                  })
+                  .catch(error => {
+                    console.error('Error:', error);
+                  });
+            const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+            return auth()
+              .signInWithCredential(googleCredential)
+              .then(() => {
+                AsyncStorage.setItem('GGL-LOGIN-USER', JSON.stringify(googleCredential));
+                navigation.dispatch(StackActions.replace('Home'));
+                console.log("Sign in Successfully")
+              });
+          }, 3000)
         } catch (error) {
-            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                // user cancelled the login flow
-            } else if (error.code === statusCodes.IN_PROGRESS) {
-                // operation (e.g. sign in) is in progress already
-            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                // play services not available or outdated
-            } else {
-                // some other error happened
-            }
+          if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            Alert.alert("Sign In Canceled By user")
+            setProgressBarVisible(false)
+            setProgress(0);
+          } else if (error.code === statusCodes.IN_PROGRESS) {
+            Alert.alert("Sign In Progress")
+            setProgressBarVisible(false)
+            setProgress(0);
+          } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+            Alert.alert("Google Services not avaialable")
+            setProgressBarVisible(false)
+            setProgress(0);
+          } else {
+            Alert.alert("An Unkown Error occured! Please try again later")
+            setProgressBarVisible(false)
+            setProgress(0);
+          }
         }
-    };
+      };
+      const getCurrentDate = () => {
+    
+        const currentDate = new Date();
+    
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so add 1
+        const day = String(currentDate.getDate()).padStart(2, '0');
+    
+        return `${year}-${month}-${day}`;
+      }
     const loaderFunctionForGoogleSignIn = () => {
         function updateProgress() {
             setProgress((currentProgress) => {
@@ -99,8 +140,10 @@ const LoginScreen = () => {
         if (email.length > 0 && password.length > 0) {
             loaderFunction();
             setProgressBarVisible(true)
+            
             signInWithEmailAndPassword(auth, email, password)
                 .then(async () => {
+
                     await AsyncStorage.setItem('EMAIL', email);
                     await AsyncStorage.setItem('PASSWORD', password);
                     navigation.dispatch(StackActions.replace("Home"))
