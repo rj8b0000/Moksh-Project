@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   Dimensions,
+  Alert,
 } from 'react-native';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import {
@@ -39,15 +40,6 @@ const Music = () => {
   const [currentSong, setCurrentSong] = useState(route.params.index);
   const [mantras, setMantras] = useState([]);
   const ref = useRef();
-
-  useEffect(() => {
-    setTimeout(() => {
-      ref.current.scrollToIndex({
-        animated: true,
-        index: currentSong,
-      });
-    }, 500);
-  }, []);
   useEffect(() => {
     fetchSongs();
     setUpPlayer();
@@ -83,7 +75,7 @@ const Music = () => {
       await TrackPlayer.skip(currentSong);
       togglePlayback(playbackState);
     } catch (err) {
-      console.log('Error in while adding track is ', err);
+      Alert.alert("An Error occured")
     }
   };
 
@@ -107,9 +99,8 @@ const Music = () => {
       );
       const mantras = response.data;
       setMantras(mantras);
-      // console.log("The mantra url is ",mantras)
     } catch (error) {
-      console.error('Error fetching songs:', error);
+      Alert.alert("An error occured");
     }
   };
   return (
