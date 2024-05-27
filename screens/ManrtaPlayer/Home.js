@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {View, Text, StyleSheet, Pressable, Image} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Image, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import MusicListItem from '../common/MusicListItem';
@@ -19,7 +19,19 @@ const Home = () => {
       setSongs(mantras);
       // console.log("The mantra url is ",mantras)
     } catch (error) {
-      console.error('Error fetching songs:', error);
+      if(!error.response)
+      {
+        Alert.alert(`PLease check your network ${error}`)
+      }
+      else if (error.response.status === 404) {
+        Alert.alert(`Resource not found ${error.response.status}`)
+      } else if (error.response.status === 500) {
+        Alert.alert(`Server not found ${error.response.status}`)
+      }
+      else
+      {
+        Alert.alert("Unknown error occured");
+      }
     }
   };
   return (

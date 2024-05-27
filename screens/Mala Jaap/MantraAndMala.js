@@ -13,6 +13,7 @@ import {
   Modal,
   TouchableOpacity,
   Animated,
+  Dimensions,
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
@@ -27,8 +28,13 @@ import TrackPlayer, {
   useProgress,
 } from 'react-native-track-player';
 import { beadImage } from '../common/AllImages';
+import LinearGradient from 'react-native-linear-gradient';
 
+const { width, height } = Dimensions.get('window');
 const Mala_Mantraplayer = () => {
+  const [time, setTime] = useState(new Date());
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const route = useRoute();
   const flatListRef = useRef(null);
   const imageRef = useRef(null);
@@ -49,12 +55,31 @@ const Mala_Mantraplayer = () => {
         animated: true,
         index: currentSong,
       });
-    }, 500);
+    }, 1000);
   }, []);
   useEffect(() => {
     setModalVisible(true);
     fetArtWorks();
   }, []);
+  useEffect(() => {
+    const timerID = setInterval(() => {
+      setTime(new Date());
+      // Check if seconds reach 60 and reset minutes and seconds
+      if (seconds === 59) {
+        setMinutes(minutes + 1);
+        setSeconds(0);
+      } else {
+        setSeconds(seconds + 1);
+      }
+    }, 1000); // Update every second
+
+    // Cleanup function to clear interval when component unmounts
+    return () => clearInterval(timerID);
+  }, [seconds, minutes]);
+
+ 
+
+  const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
   const fetArtWorks = async () => {
     try {
@@ -65,7 +90,7 @@ const Mala_Mantraplayer = () => {
       setArtWorks(artworks);
       // console.log("The mantra url is ",mantras)
     } catch (error) {
-      console.error('Error fetching songs:', error);
+      Alert.alert("An error occured");
     }
   };
 
@@ -77,12 +102,13 @@ const Mala_Mantraplayer = () => {
   };
 
   const onButtonPress = () => {
-    if (currentBeadIndex === 19) {
+    if (currentBeadIndex === 108) {
       Vibration.vibrate();
       setCurrentBeadIndex(0);
       if (totalJaap != 1) {
         setTotalJaap(totalJaap - 1);
-      } else {
+      }
+      else {
         TrackPlayer.pause();
         navigation.navigate('JaapDone');
       }
@@ -93,9 +119,6 @@ const Mala_Mantraplayer = () => {
       });
 
       setCurrentBeadIndex(currentBeadIndex + 1);
-      imageRef.current.pulse(500).then(() => {
-        console.log('Animation completed');
-      });
     }
   };
   // const onScroll = useCallback(({ viewableItems }) => {
@@ -146,49 +169,71 @@ const Mala_Mantraplayer = () => {
   };
   return (
     <>
-      <Pressable style={styles.container} onPress={onButtonPress}>
-        <View style={styles.textconteiner}>
-          <Text style={{color: '#EF6969', fontSize: 30}}>
-            *{currentBeadIndex}*
-          </Text>
-          <Text style={{color: '#EF6969', fontSize: 20}}>
-            Total Jaap - {totalJaap}
-          </Text>
-        </View>
-        <View>
-          <Image source={beadImage} style={{height: 100, width: 100}} />
-        </View>
-        <View>
-          <Image source={beadImage} style={{height: 125, width: 125}} />
-        </View>
-        <View style={{height: 150, width: 150, alignItems: 'center'}}>
-          <FlatList
-            ref={flatListRef}
-            data={new Array(120).fill('')}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={renderBead}
-            onViewableItemsChanged={onScroll}
-            viewabilityConfig={{
-              itemVisiblePercentThreshold: 100,
-            }}
-            getItemLayout={(_, index) => ({
-              length: 150,
-              offset: 150 * index,
-              index,
-            })}
-            pagingEnabled
-            horizontal={false}
-            scrollEnabled={false}
-            showsVerticalScrollIndicator={false}
-          />
-        </View>
-        <View>
-          <Image source={beadImage} style={{height: 125, width: 125}} />
-        </View>
-        <View>
-          <Image source={beadImage} style={{height: 100, width: 100}} />
-        </View>
-      </Pressable>
+       <View style={styles.container}>
+      <LinearGradient
+          colors={['#FFB6E6', 'transparent']}
+          style={{ width: '100%', height: height * 0.2, position: 'absolute', zIndex: 2 }}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 1 }}
+        />
+
+        <Pressable onPress={onButtonPress} style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{marginLeft: 10, width: width * 0.6, height: height * 0.5, justifyContent: 'space-between', marginTop: '25%'}}>
+          <View>
+          <Text style={{ color: '#F60025', fontSize: 25 }}>
+          Total Mala - {totalJaap}
+        </Text>
+        <Text style={{ color: '#F60025', fontSize: 22 }}>
+          Total Time : {formattedTime}
+        </Text>
+          </View>
+
+          <View>
+          <Text style={{ color: '#F60025', fontSize: 32 }}>
+          Count - {currentBeadIndex}
+          {/* <Button title='Reset Count' onPress={()=>setCurrentBeadIndex(0)}/> */}
+        </Text>
+          </View>
+        
+        
+        
+      </View>
+          <View style={{ width: width, height: height, flex: 1}}>
+
+            <FlatList
+              ref={flatListRef}
+              data={new Array(120).fill('')}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={renderBead}
+              onViewableItemsChanged={onScroll}
+              viewabilityConfig={{
+                itemVisiblePercentThreshold: 100,
+              }}
+              getItemLayout={(_, index) => ({
+                length: 100,
+                offset: 100 * index,
+                index,
+              })}
+              pagingEnabled
+              horizontal={false}
+              scrollEnabled={false}
+              showsVerticalScrollIndicator={false}
+            />
+
+          </View>
+          
+         
+
+
+        </Pressable>
+ <LinearGradient
+          colors={['transparent', '#FFB6E6']}
+          style={{ width: '100%', height: height * 0.2, position: 'absolute', bottom: 0 }}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 1 }}
+        />
+       
+      </View>
       <Modal visible={modalVisible} transparent={false}>
         <Text
           style={{color: 'black', marginLeft: 25, marginTop: 30}}
@@ -234,7 +279,7 @@ const Mala_Mantraplayer = () => {
       </Modal>
       <Pressable
         style={{
-          backgroundColor: 'orange',
+          backgroundColor: 'yellow',
           width: '90%',
           padding: 10,
           marginLeft: 'auto',
@@ -352,14 +397,11 @@ const Mala_Mantraplayer = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // flexDirection: 'column',
-    backgroundColor: '#FFF9A1',
+    backgroundColor: '#ff9f1a',
   },
   beadContainer: {
-    width: 150, // replace with the actual width of your bead image
-    height: 150, // replace with the actual height of your bead image
+    width: 105, // replace with the actual width of your bead image
+    height: 100, // replace with the actual height of your bead image
     // margin: -9,
   },
   beadImage: {

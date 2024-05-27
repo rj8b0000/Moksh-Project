@@ -1,0 +1,157 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/Bitter-Italic-VariableFont_wght.ttf",
+      "sha1": "0b4e3b74afa1e05ed974e4e919cfb4c5016190ba"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/Bitter-VariableFont_wght.ttf",
+      "sha1": "ade0a9b664563831fcb57351fb77fb7e92a229fc"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/OFL.txt",
+      "sha1": "a213a23aa4881410040758f535b02e7965fa5095"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/README.txt",
+      "sha1": "b4ba5dd20f062c5aebb73f7bec08b492971e4f85"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-Black.ttf",
+      "sha1": "f93551c84151e75a7cdc5966db34bf2843c59a9f"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-BlackItalic.ttf",
+      "sha1": "0c6febc8b56a9f9c13da16cd991750dd4f21c227"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-Bold.ttf",
+      "sha1": "7ca6d90997a9b7d1b9efe0c181e88bf6ef696e20"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-BoldItalic.ttf",
+      "sha1": "1dc1a5c20541fd1e2ac6c1f54476e8e7b658558f"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-ExtraBold.ttf",
+      "sha1": "0602885aca76d0d7846aeff41bb08820bf50ca0d"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-ExtraBoldItalic.ttf",
+      "sha1": "3f66a50a39a0a3ec7e7b997eabf4595c3665ccd4"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-ExtraLight.ttf",
+      "sha1": "e918bf49bb9965fa4cd08836b1d5c6ab9768fc7e"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-ExtraLightItalic.ttf",
+      "sha1": "6507cdf463790840bc1ab3cd7a93126be47db5dc"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-Italic.ttf",
+      "sha1": "eeb5139656448342b38ebb46e7f94c907df72463"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-Light.ttf",
+      "sha1": "0c8e4b262f076c1c0662eeee4b162f299bc3943d"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-LightItalic.ttf",
+      "sha1": "0e401aa40f92d44535361818917ddbfb4fa7fed3"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-Medium.ttf",
+      "sha1": "ce024ad8d1c29b3295c77332478e82d433b5c7d0"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-MediumItalic.ttf",
+      "sha1": "b17283e8266e67b660e03ed4d4b454c0a3a8f920"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-Regular.ttf",
+      "sha1": "90f07f9485d9d007e729b16b2edb5019f7cf1ac0"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-SemiBold.ttf",
+      "sha1": "7eaf06018535f72c9d869ddc66c23d2454f43318"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-SemiBoldItalic.ttf",
+      "sha1": "204a8205e711ec5fb87a84fda325649fbc6f3ce2"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-Thin.ttf",
+      "sha1": "e54e538560d143396feafa6a02a04cc69b163e58"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bitter/static/Bitter-ThinItalic.ttf",
+      "sha1": "051affb326816b90883d4bfdfbfed4bdf8bb09da"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bona_Nova/BonaNova-Bold.ttf",
+      "sha1": "85ba07b753a6f9f3b7eb5644f0fe8585abf10063"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bona_Nova/BonaNova-Italic.ttf",
+      "sha1": "607fd223d6f707cae956204c716a42a112da92aa"
+    },
+    {
+      "path": "assets/fonts/Bitter,Bona_Nova/Bona_Nova/BonaNova-Regular.ttf",
+      "sha1": "8ee975b5f325ef6d80cf075d7bd45255b4ebfafb"
+    },
+    {
+      "path": "assets/fonts/Hertical Sans.ttf",
+      "sha1": "98f7c8ca3aa91e9bb0b9497b80529b22c0a047ee"
+    },
+    {
+      "path": "assets/fonts/Inter-Black.ttf",
+      "sha1": "f79fa58ace5f55e338c99bf71e7e0702841df6f2"
+    },
+    {
+      "path": "assets/fonts/Inter-Bold.ttf",
+      "sha1": "47ff07c75746682133b81e7ac0537ce50a4c9916"
+    },
+    {
+      "path": "assets/fonts/Inter-ExtraBold.ttf",
+      "sha1": "c9b3d2f2449ab2c67ff075f806973fa3d7e104b3"
+    },
+    {
+      "path": "assets/fonts/Inter-ExtraLight.ttf",
+      "sha1": "f78ee1d6cbfc64f656247c604ef270ef116abbf5"
+    },
+    {
+      "path": "assets/fonts/Inter-Light.ttf",
+      "sha1": "cbb2506d8da21edbb2dc8cfa26e3b42a97d138f8"
+    },
+    {
+      "path": "assets/fonts/Inter-Medium.ttf",
+      "sha1": "e76f580811e031813e7150131a0724811cdd737a"
+    },
+    {
+      "path": "assets/fonts/Inter-Regular.ttf",
+      "sha1": "cfa780d0b50b2bb7eacb82984f1b18a95aaa40c5"
+    },
+    {
+      "path": "assets/fonts/Inter-SemiBold.ttf",
+      "sha1": "5e0c44e57e7e090252d79f622899e67585bb892c"
+    },
+    {
+      "path": "assets/fonts/Inter-Thin.ttf",
+      "sha1": "757805e615c974756646e54ceff8e409d5c47207"
+    },
+    {
+      "path": "assets/fonts/KronaOne-Regular.ttf",
+      "sha1": "5e5fc620063840e5434fe57d990ef978d479139b"
+    },
+    {
+      "path": "assets/fonts/Montserrat-Regular.ttf",
+      "sha1": "de57aa03e4821fdbe6c34ec2c895e8b5c914e837"
+    },
+    {
+      "path": "assets/fonts/Montserrat-SemiBold.ttf",
+      "sha1": "8580dec824bbdb6ce24d04d3aaf360776339f0a7"
+    }
+  ]
+}
