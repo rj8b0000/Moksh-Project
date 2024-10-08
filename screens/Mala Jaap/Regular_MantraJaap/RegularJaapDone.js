@@ -19,7 +19,7 @@ const RegularJaapDone = () => {
   const [imageUri, setImageUri] = useState('')
   // const { count } = route.params;/
   // const { totalJaap } = route.params;
-  const { countAndJaap, formattedTime,checkBox1 } = route.params;
+  const { count, formattedTime,checkBox1 } = route.params;
   // const totalCounts = countAndJaap.count * countAndJaap.jaap
   const navigation = useNavigation();
   const date = new Date(); // get the current date
@@ -95,7 +95,7 @@ const RegularJaapDone = () => {
       </View>
       <View style={{marginHorizontal: 10, alignSelf: 'center'}}>
         <View style={{marginTop: '10%'}}>
-            <Text style={{fontFamily: 'Inter-SemiBold', fontSize: 27, color: '#fffefe', textAlign: 'center'}}>{countAndJaap.jaap} Count Completed</Text>
+            <Text style={{fontFamily: 'Inter-SemiBold', fontSize: 27, color: '#fffefe', textAlign: 'center'}}>{count} Count Completed</Text>
             {/* <Text style={{fontFamily: 'Inter-Regular', fontSize: 20, color:'#feebc0', textAlign: 'center'}}>{item.title}</Text> */}
         </View>
       </View>

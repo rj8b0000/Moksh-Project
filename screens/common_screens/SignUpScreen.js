@@ -395,11 +395,6 @@ const SignUpScreen = () => {
               </TouchableOpacity>
           }
           <Modal visible={editModalVisible} transparent={true}>
-            {/* <Text
-    style={{color: 'black', marginLeft: 25, marginTop: 30}}
-    onPress={() => setModalVisible(false)}>
-    Back
-  </Text> */}
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={{ color: 'black', fontSize: 17 }}>Select image source</Text>

@@ -5,6 +5,7 @@ import { View, FlatList, Image, Dimensions, Animated, StyleSheet, Pressable, Tex
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import Sound from 'react-native-sound';
+import Toast from 'react-native-toast-message';
 
 const { width,height } = Dimensions.get('window');
 const IMAGE_HEIGHT = 100;
@@ -22,13 +23,15 @@ const RegularMala = () => {
   const [totalJaap2, setTotalJaap2] = useState(0);
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const totalNumberOfCounts = count * totalJaap2
+  // const totalNumberOfCounts = count * totalJaap2
   const scrollY = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  useEffect(() => {
-    setModalVisible(true);
-  }, []);
+  const [beads,setBeads]=useState(count)
+  const threaded_bid = require('../../../assets/Threaded_Bead.png');
+  // useEffect(() => {
+  //   setModalVisible(true);
+  // }, []);
   useEffect(() => {
     const timerID = setInterval(() => {
       setTime(new Date());
@@ -41,7 +44,7 @@ const RegularMala = () => {
     }, 1000); 
     return () => clearInterval(timerID);
   }, [seconds, minutes]);
-  const images = new Array(count + 5).fill().map((_, index) => ({
+  const images = new Array(beads+10).fill().map((_, index) => ({
     id: index.toString(),
     uri: `https://source.unsplash.com/random?sig=${index}`
   }));
@@ -55,13 +58,8 @@ const RegularMala = () => {
         console.log('failed to load the sound', error);
         return;
       }
-      // loaded successfully
-      // console.log('duration in seconds: ' + tic.getDuration() + 'number of channels: ' + tic.getNumberOfChannels());
-    
-      // Play the sound with an onEnd callback
       tic.play((success) => {
         if (success) {
-          // console.log('successfully finished playing');
       tic.release();
         } else {
           console.log('playback failed due to audio decoding errors');
@@ -69,36 +67,45 @@ const RegularMala = () => {
       });
     });
   }
-  const updateUserCount = async (email, totalNumberOfCounts) => {
-    try {
-      const response = await fetch(`https://bugle.co.in/moksh/public/api/user-management/get_profile_data/update_user_count_and_minutes/${email}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ mantra_total_count: totalNumberOfCounts, mantra_duration : minutes + 1 }),
-      }); 
+  // const updateUserCount = async (email, totalNumberOfCounts) => {
+  //   try {
+  //     const response = await fetch(`https://bugle.co.in/moksh/public/api/user-management/get_profile_data/update_user_count_and_minutes/${email}`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ mantra_total_count: totalNumberOfCounts, mantra_duration : minutes + 1 }),
+  //     }); 
   
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      } catch (error) {
-        console.error('Error updating user count:', error);
-        throw error;
-      }
-  };
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     } catch (error) {
+  //       console.error('Error updating user count:', error);
+  //       throw error;
+  //     }
+  // };
   const handlePress = () => {
     const newIndex = currentIndex + 1;
     setCurrentIndex(newIndex);
     if(newIndex == count)
     {
       Vibration.vibrate();
-      setCurrentIndex(0);
-      if (totalJaap != 1) {
-        setTotalJaap(totalJaap - 1);
-      } else {
-        sendToJaapCompleteScreen()
-      }
+      // setCurrentIndex(0);
+      Toast.show({
+        type : 'info',
+        text1: `${count} Count Completed`,
+        autoHide: true,
+        visibilityTime: 1000,
+      })
+      setBeads(count)
+      setCurrentIndex(0)
+      // setBeads(count + count)
+      // if (totalJaap != 1) {
+      //   setTotalJaap(totalJaap - 1);
+      // } else {
+        // sendToJaapCompleteScreen()
+      // }
     }
     else if(flatListRef.current)
     {
@@ -111,11 +118,11 @@ const RegularMala = () => {
       Vibration.vibrate(100)
     }
   };
-  const countAndJaap = { count : count, jaap : totalNumberOfCounts}
+  // const countAndJaap = { count : count, jaap : totalNumberOfCounts}
   const sendToJaapCompleteScreen = async () => {
     const email = await AsyncStorage.getItem('EMAIL');
-    updateUserCount(email,totalNumberOfCounts);
-    navigation.navigate('RegularJaapDone', { countAndJaap, formattedTime, checkBox1, checkBox2 });
+    // updateUserCount(email,totalNumberOfCounts); 
+    navigation.navigate('RegularJaapDone', { count, formattedTime, checkBox1, checkBox2 });
   }
   const setTotalJaapForMalaCount = (text) => {
     setTotalJaap(text)
@@ -168,30 +175,19 @@ const RegularMala = () => {
             });
 
             return (
-              <View style={{ height: IMAGE_HEIGHT + SPACING }}>
+              <Animated.View style={{ height: IMAGE_HEIGHT + SPACING }}>
                 <FastImage
-                source={require('../../../assets/rudraksh.png')}
+                source={index === count+1 ? threaded_bid : require('../../../assets/rudraksh.png')}
                 style={[
                   styles.image,
-                  // {
-                  //   transform: [{ scale }],
-                  // },
                 ]}
                 resizeMode={FastImage.resizeMode.cover}
                 />
-                {/* <Animated.Image
-                  source={require('../../../assets/rudraksh.png')}
-                  style={[
-                    styles.image,
-                    {
-                      transform: [{ scale }],
-                    },
-                  ]}
-                /> */}
-              </View>
+              </Animated.View>
             );
           }}
         />
+        <Toast/>
         <View style={styles.indexContainer}>
         <View>
               <Text style={styles.indexText}>

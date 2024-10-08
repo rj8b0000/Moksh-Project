@@ -33,7 +33,7 @@ import StartRegularMantraScreen from '../Mala Jaap/Regular_MantraJaap/StartRegul
 
 const { width, height } = Dimensions.get('window');
 const JaapScreen = () => {
-  const totalCount = 10
+  const totalCount = 108
   const [time, setTime] = useState(new Date());
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
